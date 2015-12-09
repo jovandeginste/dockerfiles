@@ -1,12 +1,13 @@
 FROM ubuntu
 MAINTAINER Jo Vandeginste "jo.vandeginste@gmail.com"
 
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv C3173AA6 \
- && echo "deb http://ppa.launchpad.net/brightbox/ruby-ng/ubuntu trusty main" >> /etc/apt/sources.list \
- && apt-key adv --keyserver keyserver.ubuntu.com --recv C300EE8C \
- && echo "deb http://ppa.launchpad.net/nginx/stable/ubuntu trusty main" >> /etc/apt/sources.list
 RUN apt-get update \
- && apt-get -y install ruby2.1-dev git-core curl build-essential libmysqlclient-dev \
+ && apt-get install -y git-core curl libmysqlclient-dev build-essential openssl libreadline6 libreadline6-dev curl zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev ncurses-dev automake libtool bison pkg-config
  && update-locale LANG=C.UTF-8 LC_MESSAGES=POSIX \
  && rm -rf /var/lib/apt/lists/* # 20140918
-RUN gem install --no-document bundler 
+ 
+# install RVM, Ruby, and Bundler
+RUN \curl -L https://get.rvm.io | bash -s stable && \
+	/bin/bash -l -c "rvm requirements" && \
+	/bin/bash -l -c "rvm install 2.1" && \
+	/bin/bash -l -c "gem install bundler --no-ri --no-rdoc"

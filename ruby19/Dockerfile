@@ -7,7 +7,7 @@ RUN apt-get update \
  && rm -rf /var/lib/apt/lists/* # 20140918
  
 # install RVM, Ruby, and Bundler
-RUN \curl -L https://get.rvm.io | bash -s stable
-RUN /bin/bash -l -c "rvm requirements"
-RUN /bin/bash -l -c "rvm install 1.9"
-RUN /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
+RUN \curl -L https://get.rvm.io | bash -s stable && \
+	/bin/bash -l -c "rvm requirements" && \
+	/bin/bash -l -c "rvm install 1.9" && \
+	/bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
