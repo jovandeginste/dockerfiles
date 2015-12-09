@@ -7,7 +7,8 @@ RUN apt-get update \
 			&& rm -rf /var/lib/apt/lists/* # 20140918
 
 # install RVM, Ruby, and Bundler
-RUN curl -L https://get.rvm.io | bash -s stable \
+RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 \
+	&& curl -L https://get.rvm.io | bash -s stable \
 	&& /bin/bash -l -c "rvm requirements" \
 	&& /bin/bash -l -c "rvm install 2.1" \
 	&& /bin/bash -l -c "gem install bundler --no-ri --no-rdoc"
