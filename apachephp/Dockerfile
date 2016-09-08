@@ -1,8 +1,8 @@
-FROM ubuntu
+FROM ubuntu:14.04
 MAINTAINER Jo Vandeginste "jo.vandeginste@gmail.com"
 
 RUN apt-get update \
- && apt-get -y install ca-certificates curl libxml2 apache2 php php-mysql php-gd ssmtp mailutils \
+ && apt-get -y install ca-certificates curl libxml2 apache2 php5 php5-mysql php5-gd ssmtp mailutils \
  && rm -rf /var/lib/apt/lists/* # 20140918
 
 RUN rm -rf /var/www/html \
