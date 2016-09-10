@@ -12,6 +12,8 @@ RUN rm -rf /var/www/html \
 ADD apache2.conf /etc/apache2/apache2.conf
 ADD ssmtp.conf /etc/ssmtp/ssmtp.conf
 
+RUN rm -rf /var/log/apache2 && mkdir -p /var/log/apache2 && chown -R www-data: /var/log/apache2 && chmod -R 755 /var/log/apache2
+
 WORKDIR /var/www/html
 
 EXPOSE 80
