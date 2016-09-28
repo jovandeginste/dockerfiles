@@ -10,6 +10,7 @@ RUN rm -rf /var/www/html \
  && chown -R www-data:www-data /var/lock/apache2 /var/run/apache2 /var/log/apache2 /var/www/html
 
 RUN a2enmod rewrite
+RUN locale-gen nl_BE && dpkg-reconfigure locales
 
 ADD apache2.conf /etc/apache2/apache2.conf
 ADD ssmtp.conf /etc/ssmtp/ssmtp.conf
