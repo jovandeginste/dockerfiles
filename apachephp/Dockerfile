@@ -1,8 +1,9 @@
-FROM ubuntu:14.04
+FROM ubuntu
 MAINTAINER Jo Vandeginste "jo.vandeginste@gmail.com"
 
+ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
- && apt-get -y install ca-certificates curl libxml2 apache2 php5 php5-mysql php5-gd php5-curl ssmtp mailutils \
+ && apt-get -y install ca-certificates curl libxml2 apache2 php php-mysql php-gd php-curl php-sqlite3 php-xml ssmtp mailutils \
  && rm -rf /var/lib/apt/lists/* # 20140918
 
 RUN rm -rf /var/www/html \
@@ -10,7 +11,6 @@ RUN rm -rf /var/www/html \
  && chown -R www-data:www-data /var/lock/apache2 /var/run/apache2 /var/log/apache2 /var/www/html
 
 RUN a2enmod rewrite
-RUN locale-gen nl_BE && dpkg-reconfigure locales
 
 ADD apache2.conf /etc/apache2/apache2.conf
 ADD ssmtp.conf /etc/ssmtp/ssmtp.conf
